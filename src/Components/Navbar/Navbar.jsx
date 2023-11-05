@@ -10,7 +10,7 @@ const Navbar = () => {
     </>
 // bg-gradient-to-r from-[#2e1065] to-indigo-500
     return (
-        <div className="navbar bg-gradient-to-r from-pink-500 to-[#fda4af] lg:px-20">
+        <div className="navbar bg-gradient-to-r from-[#e879f9] to-[#fda4af] lg:px-20">
             <div className="navbar-start">
                 <div className="dropdown">
                     <label tabIndex={0} className="btn btn-ghost lg:hidden">
