@@ -2,7 +2,7 @@
 
 const Footer = () => {
     return (
-        <footer className="footer footer-center p-10 bg-gradient-to-r from-[#e879f9] to-[#fda4af]  ">
+        <footer className="footer footer-center p-10 bg-black text-white  ">
             <aside>
                 <img src="../../../public/logo-web.png" className="w-[50px] h-[50px] rounded-full"/>
                 <p className="font-bold">
