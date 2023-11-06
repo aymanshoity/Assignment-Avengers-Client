@@ -1,14 +1,42 @@
-import { NavLink } from "react-router-dom";
+import { useContext } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../Provider/AuthProvider";
 
 
 const Navbar = () => {
-    const links=<>
-      <NavLink to='/' className={({isActive})=>(isActive ? ' text-xl font-bold  text-[#831843] mr-4' : ' text-xl font-bold  mr-4')}>Home</NavLink>
-      <NavLink to='/assignments' className={({isActive})=>(isActive ? 'font-bold  text-xl  text-red-500 mr-4' : ' text-xl font-bold   mr-4')}>Assignments</NavLink>
-      <NavLink to='/register' className={({isActive})=>(isActive ? 'font-bold  text-xl  text-red-500 mr-4' : ' text-xl font-bold   mr-4')}>Register</NavLink>
-      <NavLink to='/login' className={({isActive})=>(isActive ? 'font-bold  text-xl  text-red-500 mr-4' : ' text-xl font-bold   mr-4')}>Login</NavLink>
+    const navigate=useNavigate()
+    const { user, logOut } = useContext(AuthContext)
+    const handleLogout = () => {
+        logOut()
+            .then(result => {
+                console.log(result)
+                navigate('/');
+            })
+            .catch(error => console.error(error))
+    }
+
+    const links = <>
+        <NavLink to='/' className={({ isActive }) => (isActive ? ' text-xl font-bold  text-red-500 mr-4' : ' text-xl font-bold  mr-4')}>Home</NavLink>
+
+        {
+            user ?
+                <>
+                    <NavLink to='/createAssignments' className={({ isActive }) => (isActive ? 'font-bold  text-xl  text-red-500 mr-4' : ' text-xl font-bold   mr-4')}>Create-Assignment</NavLink>
+                    <NavLink to='/myAssignment' className={({ isActive }) => (isActive ? 'font-bold  text-xl  text-red-500 mr-4' : ' text-xl font-bold   mr-4')}>My-Assignment</NavLink>
+                    <NavLink to='/Submissions' className={({ isActive }) => (isActive ? 'font-bold  text-xl  text-red-500 mr-4' : ' text-xl font-bold   mr-4')}>Submissions</NavLink>
+                    <div >
+                        <button onClick={handleLogout} className="btn bg-[#e879f9]  hover:bg-[#fda4af]"> <div className="tooltip" data-tip={user.displayName}><img className="w-[30px] h-[30px] rounded-full " src={user.photoURL} alt="" /></div>Logout</button>
+                    </div>
+                     
+                </> :
+                <>
+                    <NavLink to='/assignments' className={({ isActive }) => (isActive ? 'font-bold  text-xl  text-red-500 mr-4' : ' text-xl font-bold   mr-4')}>Assignments</NavLink>
+                    <NavLink to='/register' className={({ isActive }) => (isActive ? 'font-bold  text-xl  text-red-500 mr-4' : ' text-xl font-bold   mr-4')}>Register</NavLink>
+                    <NavLink to='/login' className={({ isActive }) => (isActive ? 'font-bold  text-xl  text-red-500 mr-4' : ' text-xl font-bold   mr-4')}>Login</NavLink>
+                </>
+        }
     </>
-// bg-gradient-to-r from-[#2e1065] to-indigo-500
+    // bg-gradient-to-r from-[#2e1065] to-indigo-500
     return (
         <div className="navbar bg-gradient-to-r from-[#e879f9] to-[#fda4af] lg:px-20">
             <div className="navbar-start">
@@ -25,13 +53,13 @@ const Navbar = () => {
                     <div><h2 className="text-3xl font-bold ">Assignment Avengers</h2></div>
                 </div>
             </div>
-            
+
             <div className="navbar-end hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
                     {links}
                 </ul>
             </div>
-            
+
         </div>
     );
 };
