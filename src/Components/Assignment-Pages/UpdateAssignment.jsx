@@ -1,12 +1,23 @@
-import { useContext, useState } from "react";
+import {  useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
-
 import "react-datepicker/dist/react-datepicker.css";
-import { AuthContext } from "../../Provider/AuthProvider";
+import { useParams } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const UpdateAssignment = () => {
-    const {user}=useContext(AuthContext)
     const [selectedDate, setSelectedDate] = useState(null)
+    const {id}=useParams()
+    console.log(id)
+    const [updateAssignment,setUpdateAssignment]=useState([])
+    useEffect(()=>{
+        fetch('http://localhost:5000/assignments')
+        .then(res=>res.json())
+        .then(data=> {
+            console.log(data)
+            const findUpdateOne=data.find(assignment=> assignment._id===id)
+            setUpdateAssignment(findUpdateOne)
+        })
+    },[id])
 
     const handleUpdateAssignment=e=>{
         e.preventDefault()
@@ -22,6 +33,33 @@ const UpdateAssignment = () => {
 
         const updatedAssignment={name,email,title,image,details,level,marks,date};
         console.log(updatedAssignment)
+        Swal.fire({
+            title: "Do you want to save the changes?",
+            showDenyButton: true,
+            showCancelButton: true,
+            confirmButtonText: "Save",
+            denyButtonText: `Don't save`
+          }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+              fetch(`http://localhost:5000/assignments/${id}`,{
+                method:'PUT',
+                headers:{
+                    'content-type':'application/json'
+                },
+                body:JSON.stringify(updatedAssignment)
+              })
+              .then(res=>res.json())
+              .then(data=>{
+                console.log(data)
+                if(data.modifiedCount>1){
+                    Swal.fire("Saved!", "", "success");
+                }
+            })
+            } else if (result.isDenied) {
+              Swal.fire("Changes are not saved", "", "info");
+            }
+          });
     }
     return (
         <div className="hero min-h-screen" style={{ backgroundImage: 'url(https://i.ibb.co/dWRyg4w/The-Man-of-Iron-Crossover-x-Iron-Man-Male-Reader-CHAPTER-2-A-BLAST-FROM-THE-PAST.jpg)' }}>
@@ -38,37 +76,37 @@ const UpdateAssignment = () => {
                             <label className="label">
                                 <span className="label-text">Your Name</span>
                             </label>
-                            <input type="text" name="name" defaultValue={user.displayName}  placeholder="Student Name" className="input input-bordered" required />
+                            <input type="text" name="name" defaultValue={updateAssignment.name}  placeholder="Student Name" className="input input-bordered" required />
                         </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Your Email</span>
                             </label>
-                            <input type="email" name="email" defaultValue={user.email} placeholder="Student Email" className="input input-bordered" required />
+                            <input type="email" name="email" defaultValue={updateAssignment.email} placeholder="Student Email" className="input input-bordered" required />
                         </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Assignment Title</span>
                             </label>
-                            <input type="text" name="title" placeholder="Title" className="input input-bordered" required />
+                            <input type="text" name="title" defaultValue={updateAssignment.title} placeholder="Title" className="input input-bordered" required />
                         </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Image URL</span>
                             </label>
-                            <input type="text" name="image" placeholder="ImageURL" className="input input-bordered" required />
+                            <input defaultValue={updateAssignment.image} type="text" name="image" placeholder="ImageURL" className="input input-bordered" required />
                         </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Description</span>
                             </label>
-                            <textarea name="details" className="textarea textarea-bordered" placeholder="Assignment Description"></textarea>
+                            <textarea defaultValue={updateAssignment.details} name="details" className="textarea textarea-bordered" placeholder="Assignment Description"></textarea>
                         </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Dificulty Level</span>
                             </label>
-                            <select className="input input-bordered" required name="level" >
+                            <select defaultValue={updateAssignment.level} className="input input-bordered" required name="level" >
                                 <option value="Easy">Easy</option>
                                 <option value="Medium">Medium</option>
                                 <option value="Hard">Hard</option>
@@ -79,14 +117,14 @@ const UpdateAssignment = () => {
                                 <label className="label">
                                     <span className="label-text">Marks</span>
                                 </label>
-                                <input type="text" name="marks" placeholder="Marks" className="input input-bordered" required />
+                                <input defaultValue={updateAssignment.marks} type="text" name="marks" placeholder="Marks" className="input input-bordered" required />
                             </div>
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text">Due Date</span>
                                 </label>
                                 <div>
-                                    <DatePicker className="input input-bordered text-left" selected={selectedDate} onChange={date => setSelectedDate(date)} dateFormat='dd/MM/yyyy' name="date" required />,
+                                    <DatePicker defaultValue={updateAssignment.date} className="input input-bordered text-left" selected={selectedDate} onChange={date => setSelectedDate(date)} dateFormat='dd/MM/yyyy' name="date" required />,
 
                                 </div>
                             </div>
@@ -96,7 +134,7 @@ const UpdateAssignment = () => {
 
 
                         <div className="form-control mt-6">
-                            <button className="btn bg-gradient-to-r from-[#e879f9] to-[#fda4af]">Update Assignment</button>
+                            <button onClick={()=>handleUpdateAssignment()} className="btn bg-gradient-to-r from-[#e879f9] to-[#fda4af]">Update Assignment</button>
                         </div>
                     </form>
                 </div>

@@ -2,7 +2,7 @@ import { GrView ,GrUpdate} from "react-icons/gr";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { BsArrowRightCircle} from "react-icons/bs";
 import { Link } from "react-router-dom";
-const Assignment = ({ assignment,handleDelete }) => {
+const Assignment = ({ assignment,handleDelete,handleUpdate }) => {
 
     // console.log(assignment)
     const { image, title, marks, date,level,email ,_id} = assignment
@@ -20,7 +20,7 @@ const Assignment = ({ assignment,handleDelete }) => {
                     <div className="card-actions ">
                         <button className="btn btn-circle btn-outline text-2xl "><GrView></GrView></button>
                         <button onClick={()=>handleDelete(_id,email)} className="btn btn-circle btn-outline text-2xl"> <RiDeleteBin6Line></RiDeleteBin6Line></button>
-                        <Link to='/updateAssignment'><button className="btn btn-circle btn-outline text-2xl"><GrUpdate></GrUpdate> </button></Link>
+                        <button onClick={()=>handleUpdate(_id,email)} className="btn btn-circle btn-outline text-2xl"><GrUpdate></GrUpdate> </button>
                         {/* <button className="btn btn-circle btn-outline text-2xl"> <BsArrowRightCircle></BsArrowRightCircle></button> */}
                     </div>
                 </div>

@@ -29,7 +29,7 @@ const Routes = createBrowserRouter([
             {path:'/createAssignments' ,element:<PrivateRoutes><CreateAssignments></CreateAssignments></PrivateRoutes>},
             {path:'/myAssignment' ,element:<PrivateRoutes><MyAssignments></MyAssignments> </PrivateRoutes>},
             {path:'/submissions' ,element:<PrivateRoutes><Submissions></Submissions></PrivateRoutes>},
-            {path:'/updateAssignment' ,element:<PrivateRoutes> <UpdateAssignment></UpdateAssignment></PrivateRoutes>},
+            {path:'updateAssignment/:id' ,element:<PrivateRoutes> <UpdateAssignment></UpdateAssignment></PrivateRoutes>},
         ]
     },
 ]);

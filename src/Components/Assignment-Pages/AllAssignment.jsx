@@ -1,12 +1,13 @@
 import { useContext, useEffect, useState } from "react";
-import { useLoaderData } from "react-router-dom";
 import Assignment from "./Assignment";
 import { AuthContext } from "../../Provider/AuthProvider";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const AllAssignment = () => {
     const { user } = useContext(AuthContext)
     const [assignments, setAssignments] = useState([])
+    const navigate=useNavigate()
     useEffect(() => {
         fetch('http://localhost:5000/assignments')
             .then(res => res.json())
@@ -54,8 +55,25 @@ const AllAssignment = () => {
 
             }
         }
+        else{
+            navigate('/login')
+        }
     }
+    const handleUpdate=(id,email)=>{
+        if(user){
+            if(user.email===email){
+                return navigate(`/updateAssignment/${id}`)
+                
+            }
+            else{
+                Swal.fire("You can not Update this Assignmnet");
+            }
+        }
+        else{
+           return  navigate('/login')
+        }
 
+    }
     return (
         <div className="hero min-h-screen" style={{ backgroundImage: 'url(https://i.ibb.co/ZgsZj4X/sheild.jpg)' }}>
             <div className="hero-overlay bg-opacity-60"></div>
@@ -64,7 +82,7 @@ const AllAssignment = () => {
                 <h2 className="text-5xl text-center font-bold text-white">All Assignments</h2>
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                     {
-                        assignments.map(assignment => <Assignment handleDelete={handleDelete} key={assignment._id} assignment={assignment}></Assignment>)
+                        assignments.map(assignment => <Assignment handleUpdate={handleUpdate} handleDelete={handleDelete} key={assignment._id} assignment={assignment}></Assignment>)
                     }
                 </div>
             </div>
