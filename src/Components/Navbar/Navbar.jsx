@@ -4,7 +4,7 @@ import { AuthContext } from "../../Provider/AuthProvider";
 
 
 const Navbar = () => {
-    const navigate=useNavigate()
+    const navigate = useNavigate()
     const { user, logOut } = useContext(AuthContext)
     const handleLogout = () => {
         logOut()
@@ -19,15 +19,17 @@ const Navbar = () => {
         <NavLink to='/' className={({ isActive }) => (isActive ? ' text-xl font-bold  text-red-500 mr-4' : ' text-xl font-bold  mr-4')}>Home</NavLink>
 
         {
+            
             user ?
                 <>
+                    
                     <NavLink to='/createAssignments' className={({ isActive }) => (isActive ? 'font-bold  text-xl  text-red-500 mr-4' : ' text-xl font-bold   mr-4')}>Create-Assignment</NavLink>
                     <NavLink to='/myAssignment' className={({ isActive }) => (isActive ? 'font-bold  text-xl  text-red-500 mr-4' : ' text-xl font-bold   mr-4')}>My-Assignment</NavLink>
-                    <NavLink to='/Submissions' className={({ isActive }) => (isActive ? 'font-bold  text-xl  text-red-500 mr-4' : ' text-xl font-bold   mr-4')}>Submissions</NavLink>
-                    <div >
-                        <button onClick={handleLogout} className="btn bg-[#e879f9]  hover:bg-[#fda4af]"> <div className="tooltip" data-tip={user.displayName}><img className="w-[30px] h-[30px] rounded-full " src={user.photoURL} alt="" /></div>Logout</button>
-                    </div>
-                     
+                    <NavLink to='/submissions' className={({ isActive }) => (isActive ? 'font-bold  text-xl  text-red-500 mr-4' : ' text-xl font-bold   mr-4')}>Submissions</NavLink>
+
+                    <button onClick={handleLogout} className="btn bg-[#e879f9]  hover:bg-[#fda4af]"> <div className="tooltip" data-tip={user.displayName}><img className="w-[30px] h-[30px] rounded-full " src={user.photoURL} alt="" /></div>Logout</button>
+
+
                 </> :
                 <>
                     <NavLink to='/assignments' className={({ isActive }) => (isActive ? 'font-bold  text-xl  text-red-500 mr-4' : ' text-xl font-bold   mr-4')}>Assignments</NavLink>

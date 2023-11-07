@@ -7,6 +7,12 @@ import ErrorPage from "../Components/ErrorPage/ErrorPage";
 import Home from "../Components/Home/Home";
 import Register from "../Components/Register/Register";
 import Login from "../Components/Login/Login";
+import AllAssignment from "../Components/Assignment-Pages/AllAssignment";
+import CreateAssignments from "../Components/Assignment-Pages/CreateAssignments";
+import PrivateRoutes from "./PrivateRoutes";
+import MyAssignments from "../Components/Assignment-Pages/MyAssignments";
+import Submissions from "../Components/Assignment-Pages/Submissions";
+import UpdateAssignment from "../Components/Assignment-Pages/UpdateAssignment";
 
 
 
@@ -17,9 +23,13 @@ const Routes = createBrowserRouter([
         errorElement:<ErrorPage></ErrorPage>,
         children:[
             {path:'/' ,element:<Home></Home>},
-            // {path:'/' ,element:<Home></Home>},
+            {path:'/assignments' ,element:<AllAssignment></AllAssignment>},
             {path:'/register' ,element:<Register></Register>},
             {path:'/login' ,element:<Login></Login>},
+            {path:'/createAssignments' ,element:<PrivateRoutes><CreateAssignments></CreateAssignments></PrivateRoutes>},
+            {path:'/myAssignment' ,element:<PrivateRoutes><MyAssignments></MyAssignments> </PrivateRoutes>},
+            {path:'/submissions' ,element:<PrivateRoutes><Submissions></Submissions></PrivateRoutes>},
+            {path:'/updateAssignment' ,element:<PrivateRoutes> <UpdateAssignment></UpdateAssignment></PrivateRoutes>},
         ]
     },
 ]);
