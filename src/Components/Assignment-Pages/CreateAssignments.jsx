@@ -1,27 +1,49 @@
 import { useContext, useState } from "react";
 import DatePicker from "react-datepicker";
-
+import Swal from "sweetalert2";
 import "react-datepicker/dist/react-datepicker.css";
 import { AuthContext } from "../../Provider/AuthProvider";
 
 const CreateAssignments = () => {
-    const {user}=useContext(AuthContext)
+    const { user } = useContext(AuthContext)
     const [selectedDate, setSelectedDate] = useState(null)
 
-    const handleCreateAssignment=e=>{
+    const handleCreateAssignment = e => {
         e.preventDefault()
-        const form =e.target;
-        const name=form.name.value
-        const email=form.email.value
-        const title=form.title.value
-        const image=form.image.value
-        const details=form.details.value
-        const level=form.level.value
-        const marks=form.marks.value
-        const date=form.date.value
+        const form = e.target;
+        const name = form.name.value
+        const email = form.email.value
+        const title = form.title.value
+        const image = form.image.value
+        const details = form.details.value
+        const level = form.level.value
+        const marks = form.marks.value
+        const date = form.date.value
 
-        const newAssignment={name,email,title,image,details,level,marks,date};
+        const newAssignment = { name, email, title, image, details, level, marks, date };
         console.log(newAssignment)
+
+        fetch('http://localhost:5000/assignments', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json',
+            },
+            body: JSON.stringify(newAssignment)
+
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                if(data.insertedId){
+                    Swal.fire({
+                        title: "Success",
+                        text: "Assignment Created Successfully!",
+                        icon: "success"
+                      });
+                }
+                
+
+            })
     }
     return (
         <div className="hero min-h-screen" style={{ backgroundImage: 'url(https://i.ibb.co/RTQ1dN7/HD-wallpaper-avengers-infinity-war-poster-hd-4k-movies-2018-movies.jpg)' }}>
@@ -38,7 +60,7 @@ const CreateAssignments = () => {
                             <label className="label">
                                 <span className="label-text">Your Name</span>
                             </label>
-                            <input type="text" name="name" defaultValue={user.displayName}  placeholder="Student Name" className="input input-bordered" required />
+                            <input type="text" name="name" defaultValue={user.displayName} placeholder="Student Name" className="input input-bordered" required />
                         </div>
                         <div className="form-control">
                             <label className="label">

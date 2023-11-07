@@ -17,7 +17,7 @@ const Navbar = () => {
 
     const links = <>
         <NavLink to='/' className={({ isActive }) => (isActive ? ' text-xl font-bold  text-red-500 mr-4' : ' text-xl font-bold  mr-4')}>Home</NavLink>
-
+        <NavLink to='/assignments' className={({ isActive }) => (isActive ? 'font-bold  text-xl  text-red-500 mr-4' : ' text-xl font-bold   mr-4')}>Assignments</NavLink>
         {
             
             user ?
@@ -32,7 +32,7 @@ const Navbar = () => {
 
                 </> :
                 <>
-                    <NavLink to='/assignments' className={({ isActive }) => (isActive ? 'font-bold  text-xl  text-red-500 mr-4' : ' text-xl font-bold   mr-4')}>Assignments</NavLink>
+
                     <NavLink to='/register' className={({ isActive }) => (isActive ? 'font-bold  text-xl  text-red-500 mr-4' : ' text-xl font-bold   mr-4')}>Register</NavLink>
                     <NavLink to='/login' className={({ isActive }) => (isActive ? 'font-bold  text-xl  text-red-500 mr-4' : ' text-xl font-bold   mr-4')}>Login</NavLink>
                 </>
