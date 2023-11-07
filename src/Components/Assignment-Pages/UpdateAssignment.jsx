@@ -22,8 +22,6 @@ const UpdateAssignment = () => {
     const handleUpdateAssignment=e=>{
         e.preventDefault()
         const form =e.target;
-        const name=form.name.value
-        const email=form.email.value
         const title=form.title.value
         const image=form.image.value
         const details=form.details.value
@@ -31,7 +29,7 @@ const UpdateAssignment = () => {
         const marks=form.marks.value
         const date=form.date.value
 
-        const updatedAssignment={name,email,title,image,details,level,marks,date};
+        const updatedAssignment={title,image,details,level,marks,date};
         console.log(updatedAssignment)
         Swal.fire({
             title: "Do you want to save the changes?",
@@ -72,18 +70,7 @@ const UpdateAssignment = () => {
 
                 <div className="card flex-shrink-0 w-full min-w-sm shadow-2xl bg-base-100 ">
                     <form onSubmit={handleUpdateAssignment} className="card-body">
-                        <div className="form-control">
-                            <label className="label">
-                                <span className="label-text">Your Name</span>
-                            </label>
-                            <input type="text" name="name" defaultValue={updateAssignment.name}  placeholder="Student Name" className="input input-bordered" required />
-                        </div>
-                        <div className="form-control">
-                            <label className="label">
-                                <span className="label-text">Your Email</span>
-                            </label>
-                            <input type="email" name="email" defaultValue={updateAssignment.email} placeholder="Student Email" className="input input-bordered" required />
-                        </div>
+            
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Assignment Title</span>
