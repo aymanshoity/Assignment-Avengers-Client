@@ -10,6 +10,7 @@ const Navbar = () => {
         logOut()
             .then(result => {
                 console.log(result)
+                
                 navigate('/');
             })
             .catch(error => console.error(error))

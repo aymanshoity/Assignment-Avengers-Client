@@ -21,6 +21,8 @@ const Login = () => {
             .then(result => {
                 console.log(result.user)
                 setSuccessMessage('User Logged Successfully!!')
+                
+
             })
             .catch(error => {
                 console.log(error)
@@ -39,6 +41,9 @@ const Login = () => {
             .then(result => {
                 console.log(result.user)
                 setSuccessMessage('User Logged Successfully!!')
+                
+                // get access token
+
             })
             .catch(error => {
                 console.error(error)
