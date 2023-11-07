@@ -18,7 +18,7 @@ const Assignment = ({ assignment,handleDelete,handleUpdate }) => {
                         <p className="font-bold">Deadline:{date}</p>
                     </div>
                     <div className="card-actions ">
-                        <button className="btn btn-circle btn-outline text-2xl "><GrView></GrView></button>
+                        <Link to={`/singleDetailAssignment/${_id}`}><button className="btn btn-circle btn-outline text-2xl "><GrView></GrView></button></Link>
                         <button onClick={()=>handleDelete(_id,email)} className="btn btn-circle btn-outline text-2xl"> <RiDeleteBin6Line></RiDeleteBin6Line></button>
                         <button onClick={()=>handleUpdate(_id,email)} className="btn btn-circle btn-outline text-2xl"><GrUpdate></GrUpdate> </button>
                         {/* <button className="btn btn-circle btn-outline text-2xl"> <BsArrowRightCircle></BsArrowRightCircle></button> */}
