@@ -7,24 +7,36 @@ import { useNavigate } from "react-router-dom";
 const AllAssignment = () => {
     const { user } = useContext(AuthContext)
     const [assignments, setAssignments] = useState([])
-    const navigate=useNavigate()
+    const navigate = useNavigate()
     useEffect(() => {
         fetch('http://localhost:5000/assignments')
             .then(res => res.json())
-            .then(data => setAssignments(data))
+            .then(data => {
+                setAssignments(data)
+
+            })
     }, [])
+
+    const handleLevel = e => {
+        e.preventDefault()
+        const level = e.target.level.value
+        console.log(level)
+        const levelData = assignments.filter(assignment => assignment.level === level)
+        setAssignments(levelData)
+
+    }
     const handleDelete = (id, email) => {
 
         if (user) {
             if (user.email === email) {
-                fetch(`http://localhost:5000/assignments/${id}`,{
-                    method:'DELETE'
+                fetch(`http://localhost:5000/assignments/${id}`, {
+                    method: 'DELETE'
                 })
                     .then(res => res.json())
                     .then(data => {
                         console.log(data)
                         if (data.deletedCount > 0) {
-                        
+
                             Swal.fire({
                                 title: "Are you sure?",
                                 text: "You won't be able to revert this!",
@@ -55,22 +67,22 @@ const AllAssignment = () => {
 
             }
         }
-        else{
+        else {
             navigate('/login')
         }
     }
-    const handleUpdate=(id,email)=>{
-        if(user){
-            if(user.email===email){
+    const handleUpdate = (id, email) => {
+        if (user) {
+            if (user.email === email) {
                 return navigate(`/updateAssignment/${id}`)
-                
+
             }
-            else{
+            else {
                 Swal.fire("You can not Update this Assignmnet");
             }
         }
-        else{
-           return  navigate('/login')
+        else {
+            return navigate('/login')
         }
 
     }
@@ -80,6 +92,18 @@ const AllAssignment = () => {
 
             <div className="  ">
                 <h2 className="text-5xl text-center font-bold text-white">All Assignments</h2>
+                <div className="flex flex-row justify-center items-center">
+                    <h2 className="text-2xl text-center font-bold text-white my-6">Choose the Difficulty Level</h2>
+                    <form onSubmit={handleLevel} className="mx-4">
+                        <select name='level' className="input input-bordered" >
+                            <option value="Easy">Easy</option>
+                            <option value="Medium">Medium</option>
+                            <option value="Hard">Hard</option>
+                        </select>
+                        <input className="input input-bordered" type="submit" value="Submit" />
+                    </form>
+
+                </div>
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                     {
                         assignments.map(assignment => <Assignment handleUpdate={handleUpdate} handleDelete={handleDelete} key={assignment._id} assignment={assignment}></Assignment>)

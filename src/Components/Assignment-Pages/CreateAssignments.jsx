@@ -88,7 +88,7 @@ const CreateAssignments = () => {
                         </div>
                         <div className="form-control">
                             <label className="label">
-                                <span className="label-text">Dificulty Level</span>
+                                <span className="label-text">Difficulty Level</span>
                             </label>
                             <select className="input input-bordered" required name="level" >
                                 <option value="Easy">Easy</option>
