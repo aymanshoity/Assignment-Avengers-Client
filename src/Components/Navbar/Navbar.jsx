@@ -25,8 +25,9 @@ const Navbar = () => {
                 <>
                     
                     <NavLink to='/createAssignments' className={({ isActive }) => (isActive ? 'font-bold  text-xl  text-red-500 mr-4' : ' text-xl font-bold   mr-4')}>Create-Assignment</NavLink>
-                    <NavLink to='/myAssignment' className={({ isActive }) => (isActive ? 'font-bold  text-xl  text-red-500 mr-4' : ' text-xl font-bold   mr-4')}>My-Assignment</NavLink>
+                    <NavLink to='/myAssignment' className={({ isActive }) => (isActive ? 'font-bold  text-xl  text-red-500 mr-4' : ' text-xl font-bold   mr-4')}>My-Submissions</NavLink>
                     <NavLink to='/submissions' className={({ isActive }) => (isActive ? 'font-bold  text-xl  text-red-500 mr-4' : ' text-xl font-bold   mr-4')}>Submissions</NavLink>
+                    <NavLink to='/mySubmissions' className={({ isActive }) => (isActive ? 'font-bold  text-xl  text-red-500 mr-4' : ' text-xl font-bold   mr-4')}>My-Assignment</NavLink>
 
                     <button onClick={handleLogout} className="btn bg-[#e879f9]  hover:bg-[#fda4af]"> <div className="tooltip" data-tip={user.displayName}><img className="w-[30px] h-[30px] rounded-full " src={user.photoURL} alt="" /></div>Logout</button>
 
