@@ -9,7 +9,7 @@ const MyAssignments = () => {
     const { user } = useContext(AuthContext)
     const url = `http://localhost:5000/myAssignments?email=${user?.email}`
     useEffect(() => {
-        fetch(url)
+        fetch(url,{credentials:'include'})
             .then(res => res.json())
             .then(data => setMyAssignments(data))
 
