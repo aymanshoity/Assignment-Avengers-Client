@@ -25,9 +25,9 @@ const PendingSubmissions = ({ assignment, index, user, handleGiveMark }) => {
                             </div>
                             <div className="form-control">
                                 <label className="label">
-                                    <span className="label-text text-black">Examinee Feedback</span>
+                                    <span className="label-text">Examinee Feedback</span>
                                 </label>
-                                <textarea type="text" placeholder="feedback" name="feedback" className="textarea textarea-bordered" required />
+                                <textarea type="text" placeholder="feedback" name="feedback" className="textarea textarea-bordered  text-black" required />
 
                             </div>
                             <div className="form-control mt-6">

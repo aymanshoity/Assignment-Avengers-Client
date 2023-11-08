@@ -7,7 +7,7 @@ const MySubmitedAssignments = () => {
     const { user } = useContext(AuthContext);
     const [myAssignments, setMyAssignments] = useState([])
 
-    const url = `http://localhost:5000/submissions?email=${user.email}`
+    const url = `https://assignment-avengers-server.vercel.app/submissions?email=${user.email}`
     useEffect(() => {
         fetch(url)
             .then(res => res.json())

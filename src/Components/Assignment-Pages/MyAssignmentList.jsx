@@ -3,7 +3,7 @@ import Swal from "sweetalert2";
 
 
 const MyAssignmentList = ({ assignment, index,handleSubmit }) => {
-    const { title, studentName, studentEmail, marks, _id } = assignment;
+    const { title, studentName, email, marks, _id } = assignment;
     const allocatedMarks = marks
 
     return (
@@ -28,7 +28,7 @@ const MyAssignmentList = ({ assignment, index,handleSubmit }) => {
                     <label className="label">
                         <span className="label-text text-white">Students Email</span>
                     </label>
-                    <input type="email" name="email" defaultValue={studentEmail} placeholder="email" className="input input-bordered" required />
+                    <input type="email" name="email" defaultValue={email} placeholder="email" className="input input-bordered" required />
                 </div>
 
                 <div className="form-control">

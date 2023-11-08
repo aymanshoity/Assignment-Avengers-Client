@@ -10,7 +10,7 @@ const UpdateAssignment = () => {
     console.log(id)
     const [updateAssignment,setUpdateAssignment]=useState([])
     useEffect(()=>{
-        fetch('http://localhost:5000/assignments')
+        fetch('https://assignment-avengers-server.vercel.app/assignments')
         .then(res=>res.json())
         .then(data=> {
             console.log(data)
@@ -40,7 +40,7 @@ const UpdateAssignment = () => {
           }).then((result) => {
             /* Read more about isConfirmed, isDenied below */
             if (result.isConfirmed) {
-              fetch(`http://localhost:5000/assignments/${id}`,{
+              fetch(`https://assignment-avengers-server.vercel.app/assignments/${id}`,{
                 method:'PUT',
                 headers:{
                     'content-type':'application/json'

@@ -10,7 +10,7 @@ const SingleDetailAssignment = () => {
     console.log(id)
     const [viewAssignment, setViewAssignment] = useState([])
     useEffect(() => {
-        fetch('http://localhost:5000/assignments')
+        fetch('https://assignment-avengers-server.vercel.app/assignments')
             .then(res => res.json())
             .then(data => {
                 console.log(data)
@@ -18,11 +18,11 @@ const SingleDetailAssignment = () => {
                 setViewAssignment(findUpdateOne)
             })
     }, [id])
-    const { image, title, marks, date, level, email, _id, details } = viewAssignment;
+    const { image, title, marks, date, level, _id, details } = viewAssignment;
     const studentName=user.displayName;
-    const studentEmail=user.email;
-    console.log(studentEmail,studentName)
-    const takenAssignment={studentName,studentEmail,image, title, marks, date, level,details}
+    const email=user.email;
+    console.log(email,studentName)
+    const takenAssignment={studentName,email,image, title, marks, date, level,details}
     const handleTakeAssignment = (takenAssignment) => {
         Swal.fire({
             title: "Are you sure?",
@@ -35,7 +35,7 @@ const SingleDetailAssignment = () => {
         }).then((result) => {
             if (result.isConfirmed) {
 
-                fetch('http://localhost:5000/myAssignments',{
+                fetch('https://assignment-avengers-server.vercel.app/myAssignments',{
                     method:'POST',
                     headers:{
                         'content-type':'application/json'

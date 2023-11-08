@@ -23,7 +23,7 @@ const CreateAssignments = () => {
         const newAssignment = { name, email, title, image, details, level, marks, date };
         console.log(newAssignment)
 
-        fetch('http://localhost:5000/assignments', {
+        fetch('https://assignment-avengers-server.vercel.app/assignments', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',

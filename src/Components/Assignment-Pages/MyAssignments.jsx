@@ -7,11 +7,13 @@ import Swal from "sweetalert2";
 const MyAssignments = () => {
     const [myAssignments, setMyAssignments] = useState([])
     const { user } = useContext(AuthContext)
-    const url = `http://localhost:5000/myAssignments?email=${user?.email}`
+    const url = `https://assignment-avengers-server.vercel.app/myAssignments?email=${user?.email}`
     useEffect(() => {
         fetch(url,{credentials:'include'})
             .then(res => res.json())
-            .then(data => setMyAssignments(data))
+            .then(data => {
+                console.log(data)
+                setMyAssignments(data)})
 
     }, [url])
 
@@ -28,7 +30,7 @@ const MyAssignments = () => {
 
         const mySubmission = { name, email, status, title, note, link, marks,allocatedMarks }
         console.log(mySubmission)
-        fetch('http://localhost:5000/submissions', {
+        fetch('https://assignment-avengers-server.vercel.app/submissions', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',

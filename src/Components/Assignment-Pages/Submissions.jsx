@@ -7,7 +7,7 @@ import Swal from "sweetalert2";
 const Submissions = () => {
     const [pending, setPending] = useState([])
     const { user } = useContext(AuthContext)
-    const url = `http://localhost:5000/submissions?status=pending`
+    const url = `https://assignment-avengers-server.vercel.app/submissions?status=pending`
     useEffect(() => {
         fetch(url)
             .then(res => res.json())
@@ -28,7 +28,7 @@ const Submissions = () => {
         const evaluation = { status, marks };
         console.log(evaluation)
         
-        fetch(`http://localhost:5000/submissions/${id}`, {
+        fetch(`https://assignment-avengers-server.vercel.app/submissions/${id}`, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json'
@@ -42,7 +42,7 @@ const Submissions = () => {
                     
                     Swal.fire({
                         title: "Good job!",
-                        text: "You clicked the button!",
+                        text: "You marked an  Assignment!",
                         icon: "success"
                     });
                     const remaining = pending.filter(p => p._id !== id)

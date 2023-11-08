@@ -36,13 +36,13 @@ const AuthProvider = ({children}) => {
             setLoading(false)
             if(currentUser){
                 
-                axios.post('http://localhost:5000/jwt',loggedUserEmail,{ withCredentials:true})
+                axios.post('https://assignment-avengers-server.vercel.app/jwt',loggedUserEmail,{ withCredentials:true})
                 .then(res=>{
                     console.log('token response',res.data)
                 })
             }
             else{
-                axios.post('http://localhost:5000/logout',loggedUserEmail,{withCredentials:true})
+                axios.post('https://assignment-avengers-server.vercel.app/logout',loggedUserEmail,{withCredentials:true})
                 .then(res=>{
                     console.log(res.data)
                 })

@@ -9,7 +9,7 @@ const AllAssignment = () => {
     const [assignments, setAssignments] = useState([])
     const navigate = useNavigate()
     useEffect(() => {
-        fetch('http://localhost:5000/assignments')
+        fetch('https://assignment-avengers-server.vercel.app/assignments')
             .then(res => res.json())
             .then(data => {
                 setAssignments(data)
@@ -29,7 +29,7 @@ const AllAssignment = () => {
 
         if (user) {
             if (user.email === email) {
-                fetch(`http://localhost:5000/assignments/${id}`, {
+                fetch(`https://assignment-avengers-server.vercel.app/assignments/${id}`, {
                     method: 'DELETE'
                 })
                     .then(res => res.json())
@@ -95,12 +95,12 @@ const AllAssignment = () => {
                 <div className="flex flex-row justify-center items-center">
                     <h2 className="text-2xl text-center font-bold text-white my-6">Choose the Difficulty Level</h2>
                     <form onSubmit={handleLevel} className="mx-4">
-                        <select name='level' className="input input-bordered" >
+                        <select name='level' className="input input-bordered bg-gradient-to-r from-[#e879f9] to-[#fda4af]" >
                             <option value="Easy">Easy</option>
                             <option value="Medium">Medium</option>
                             <option value="Hard">Hard</option>
                         </select>
-                        <input className="input input-bordered" type="submit" value="Submit" />
+                        <input className=" mx-4 input input-bordered bg-gradient-to-r from-[#e879f9] to-[#fda4af]" type="submit" value="Submit" />
                     </form>
 
                 </div>
