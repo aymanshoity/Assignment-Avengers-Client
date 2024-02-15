@@ -8,11 +8,14 @@ const AllAssignment = () => {
     const { user } = useContext(AuthContext)
     const [assignments, setAssignments] = useState([])
     const navigate = useNavigate()
+    const [assignmentsLevel, setAssignmentsLevel] = useState([])
+    
     useEffect(() => {
         fetch('https://assignment-avengers-server.vercel.app/assignments')
             .then(res => res.json())
             .then(data => {
                 setAssignments(data)
+                setAssignmentsLevel(data)
 
             })
     }, [])
@@ -21,8 +24,20 @@ const AllAssignment = () => {
         e.preventDefault()
         const level = e.target.level.value
         console.log(level)
-        const levelData = assignments.filter(assignment => assignment.level === level)
-        setAssignments(levelData)
+        if(level==='Easy'){
+            const Easy = assignments.filter(assignment => assignment.level === level)
+            setAssignmentsLevel(Easy)
+        }else if(level==='Medium'){
+            const Medium = assignments.filter(assignment => assignment.level === level)
+            setAssignmentsLevel(Medium)
+        }else if(level==='Hard'){
+            const Hard = assignments.filter(assignment => assignment.level === level)
+            setAssignmentsLevel(Hard)
+        }else if(level==='All Assignments'){
+            
+            setAssignmentsLevel(assignments)
+        }
+        
 
     }
     const handleDelete = (id, email) => {
@@ -54,6 +69,7 @@ const AllAssignment = () => {
                                     });
                                     const remaining = assignments.filter(assignment => assignment._id !== id)
                                     setAssignments(remaining)
+                                    setAssignmentsLevel(remaining)
                                 }
                             });
 
@@ -96,6 +112,7 @@ const AllAssignment = () => {
                     <h2 className="text-2xl text-center font-bold text-white my-6">Choose the Difficulty Level</h2>
                     <form onSubmit={handleLevel} className="mx-4">
                         <select name='level' className="input input-bordered bg-gradient-to-r from-[#e879f9] to-[#fda4af]" >
+                            <option value="All Assignments">All Assignments</option>
                             <option value="Easy">Easy</option>
                             <option value="Medium">Medium</option>
                             <option value="Hard">Hard</option>
@@ -106,7 +123,7 @@ const AllAssignment = () => {
                 </div>
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                     {
-                        assignments.map(assignment => <Assignment handleUpdate={handleUpdate} handleDelete={handleDelete} key={assignment._id} assignment={assignment}></Assignment>)
+                        assignmentsLevel.map(assignment => <Assignment handleUpdate={handleUpdate} handleDelete={handleDelete} key={assignment._id} assignment={assignment}></Assignment>)
                     }
                 </div>
             </div>
